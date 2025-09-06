@@ -1,0 +1,31 @@
+.homeContainer {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center; /* Vertically centers children like .seperator */
+}
+
+/* Separator for desktop */
+.seperator {
+  border-right: 2px solid rgb(203, 201, 201);
+  margin: 0 20px;
+  height: 80%; /* Adjust this if needed */
+  align-self: center; /* Ensures it's vertically centered individually */
+}
+
+/* Mobile view (stacked vertically) */
+@media (max-width: 768px) {
+  .homeContainer {
+    flex-direction: column;
+    align-items: stretch; /* Optional, lets items take full width */
+  }
+
+  .seperator {
+    border-right: none;
+    border-bottom: 1px solid rgb(203, 201, 201);
+    margin: 20px 0;
+    width: 80%; /* Optional: gives some horizontal space on mobile */
+    height: auto; /* Reset height */
+    align-self: center; /* Center it horizontally */
+  }
+}

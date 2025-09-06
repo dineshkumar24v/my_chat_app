@@ -1,0 +1,57 @@
+.userInfoCont{
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  img{
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+}
+.user{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.icons{
+  display: flex;
+  gap: 1rem;
+}
+.icon{
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+
+/* Loading states */
+/* .userInfoCont.loading .user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  
+}
+
+.avatar-skeleton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #eee;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.name-skeleton {
+  width: 100px;
+  height: 20px;
+  background: #eee;
+  border-radius: 4px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+} */

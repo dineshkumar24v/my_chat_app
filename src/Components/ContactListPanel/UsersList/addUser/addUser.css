@@ -1,0 +1,103 @@
+/* 
+.addUser{
+  input{
+    padding: .5rem;
+    margin: 10px;
+  }
+  form{
+    button{
+      padding: 8px 12px;
+      border-radius: 7px;
+      background-color: #5d9ff5;
+      border: none;
+
+      &:hover{
+        background-color: #2270d5;
+      }
+    }
+  }
+}
+
+.user{
+  .detail{
+    
+    img{
+      margin: 10px;
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    span{
+      padding: 10px;
+    }
+  }
+  button{
+    padding: 4px 10px;
+    border-radius: 7px;
+    background-color: #5d9ff5;
+    border: none;
+
+    &:hover{
+      background-color: #2270d5;
+    }
+  }
+} */
+
+.addUser form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.addUser form input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.addUser form button {
+  padding: 8px 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addUser form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.addUser .user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.addUser .user .detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.addUser .user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.addUser .user button {
+  padding: 6px 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

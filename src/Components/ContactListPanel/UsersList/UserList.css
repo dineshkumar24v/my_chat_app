@@ -1,0 +1,71 @@
+.userListCont{
+  overflow: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+.search{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .5rem;
+}
+.searchBar{
+  flex: 1;
+  background-color: rgb(127, 126, 126);
+  color: white;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  padding: .01rem;
+  padding-left: 8px;
+}
+.searchInput{
+  border: none;
+  outline: none;
+  background-color: rgb(127, 126, 126);
+  flex: 1;
+  cursor: pointer;
+  color: white;
+}
+.searchInput::placeholder{
+  color: white;
+  padding: 1rem;
+  opacity: .7;
+  font-size: 1rem;
+}
+.searchIcon{
+  font-size: 1.1rem;
+  opacity: .7;
+  cursor: pointer;
+}
+.plusIcon{
+  width: 2rem;
+  height: 2rem;
+  background-color: rgb(127, 126, 126);
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+/* contacts users css */
+.userList{
+display: flex;
+gap: 1rem;
+padding: .5rem;
+padding-left: .9rem;
+cursor: pointer;
+
+&:hover{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+  .userTexts{
+    span{
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    p{
+      font-size: .9rem;
+      color: rgb(83, 74, 74);
+    }
+  }
+}
