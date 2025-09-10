@@ -17,7 +17,7 @@
 @media (max-width: 768px) {
   .homeContainer {
     flex-direction: column;
-    align-items: stretch; /* Optional, lets items take full width */
+    align-items:center; /* Optional, lets items take full width */
   }
 
   .seperator {
