@@ -10,9 +10,12 @@ body{
 .appContainer{
   display: flex;
   height: 90vh;
-  background-color:#def9c4;
+  /* background-color:#def9c4; */
+  background-image: url('https://wallpaperaccess.com/full/317501.jpg');
   border-radius: 12px;
+  color: white;
 }
+
 /* .loading{
   padding: 50px;
   display: flex;
@@ -44,4 +47,12 @@ body{
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Mobile view (stacked vertically) */
+@media (max-width: 768px) {
+  .appContainer{
+    height: auto;
+
+  }
 }
