@@ -1,76 +1,75 @@
-.detailsCont{
+.detailsCont {
   flex: 1;
   overflow: scroll;
 
-  img{
+  img {
     height: 2.5rem;
     width: 2.5rem;
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;
   }
-  .userDetails{
-    margin-top: .5rem;
-    padding: .2rem .1rem;
+  .userDetails {
+    margin-top: 0.5rem;
+    padding: 0.2rem 0.1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: .01rem;
+    gap: 0.01rem;
     border-bottom: 1px solid rgb(203, 201, 201);
-    
-    h2{
+
+    h2 {
       font-size: 1.3rem;
       font-weight: 700;
       margin-bottom: 1%;
     }
-    p{
-      font-size: .7rem;
+    p {
+      font-size: 0.7rem;
       margin-bottom: 0%;
       color: #a5a5a5;
     }
   }
-  .userInfoCont{
-    padding: .1rem;
+  .userInfoCont {
+    padding: 0.1rem;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 0.5rem;
 
-    .option{
-
-      .title{
+    .option {
+      .title {
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
 
-        .icon{
+        .icon {
           cursor: pointer;
           display: flex;
           justify-content: space-between;
         }
       }
     }
-    .photos{
+    .photos {
       display: flex;
       flex-direction: column;
       gap: 20px;
 
-      .photoItem{
+      .photoItem {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        
-        .photoDetail{
+
+        .photoDetail {
           display: flex;
           align-items: center;
           gap: 20px;
 
-          img{
+          img {
             width: 40px;
             height: 40px;
             border-radius: 5px;
             object-fit: cover;
           }
-          span{
+          span {
             font-size: 14px;
             color: gray;
             font-weight: 400;
@@ -78,27 +77,24 @@
         }
       }
     }
-    button{
+    button {
       padding: 5px;
       width: 90%;
       background-color: rgba(230, 74, 105, 0.553);
       color: white;
       border: none;
       border-radius: 5px;
-      cursor: pointer; 
+      cursor: pointer;
 
-      &:hover{
-      background-color: rgba(216, 17, 57, 0.856);
-      
+      &:hover {
+        background-color: rgba(216, 17, 57, 0.856);
       }
     }
   }
-
-  
 }
-#logout{
+#logout {
   background-color: #5d9ff5;
 }
-#logout:hover{
+#logout:hover {
   background-color: #2270d5;
 }
