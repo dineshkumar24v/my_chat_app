@@ -27,9 +27,13 @@ const ChatPanel = () => {
 
   const endRef = useRef(null);  // useRef hook
 
-  useEffect(()=>{
-    endRef.current?.scrollIntoView({ behavior : "smooth"})
-  }, []);
+  // Sometimes, the first render might not have any messages, so scrollIntoView does nothing. You can make sure to only run the scroll when chat?.messages?.length is non-zero.
+
+  useEffect(() => {
+  if (chat?.messages?.length > 0) {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }
+}, [chat?.messages]);
 
   useEffect(()=>{
     const unSub = onSnapshot(doc(db, "chats", chatId), (res)=>{
