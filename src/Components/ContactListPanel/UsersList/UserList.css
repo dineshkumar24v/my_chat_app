@@ -2,6 +2,7 @@
   overflow: scroll;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  padding-left: .6rem;
 }
 .search{
   display: flex;
@@ -53,19 +54,20 @@ gap: 1rem;
 padding: .5rem;
 padding-left: .9rem;
 cursor: pointer;
+align-items: center;
 
 &:hover{
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-}
+  box-shadow: rgba(229, 229, 231, 0.25) 0px 30px 60px -12px inset, rgba(244, 243, 243, 0.3) 0px 18px 36px -18px inset;
 
   .userTexts{
     span{
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     p{
-      font-size: .9rem;
-      color: rgb(83, 74, 74);
+      font-size: 1rem;
+      color: rgb(175, 189, 193);
     }
   }
+}
 }
