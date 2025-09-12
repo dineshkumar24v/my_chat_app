@@ -1,17 +1,23 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family:monospace;
+  font-family: monospace;
 }
-body{
-  height: 100vh;
+body {
+  min-height: 100vh;
   background-image: url(bg3.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem 0;
+  overflow-y: auto;
 }
-.appContainer{
+/* --------- main container ------- */
+.appContainer {
   display: flex;
   height: 90vh;
   width: 90vw;
@@ -23,7 +29,6 @@ body{
   color: white;
 }
 
-
 /* .loading{
   padding: 50px;
   display: flex;
@@ -34,13 +39,16 @@ body{
   color: white;
 } */
 
+/* ---- Loading Screen ---- */
 .loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  text-align: center;
+  color: black;
 }
 
 .spinner {
@@ -53,14 +61,44 @@ body{
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-/* Mobile view (stacked vertically) */
+/* Mobile view (stacked vertically)
 @media (max-width: 768px) {
   .appContainer{
     height: auto;
     width: auto;
+  }
+} */
+
+/* ===== Responsive Layout ===== */
+
+/* Tablets (portrait + landscape) */
+@media (max-width: 1024px) {
+  .appContainer {
+    flex-direction: column;
+    height: 95vh;
+    width: 95vw;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .appContainer {
+    flex-direction: column;
+    width: 80vw;
+    height: 180vh;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    overflow: auto;
   }
 }
