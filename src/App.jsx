@@ -13,21 +13,24 @@ import { useChatStore } from "./Zustand/chatStore";
 // import { Route,Routes } from 'react-router-dom'
 
 const App = () => {
-  const { currentUser, isLoading, fetchUserInfo } = useUserStore();
+  const { currentUser, isLoading, fetchUserInfo, setCurrentUser } = useUserStore();
   const { chatId } = useChatStore();
 
   useEffect(() => {
     const unSub = onAuthStateChanged(authentication, (user) => {
       if (user) {
-        console.log(user.uid);
+        console.log("Firebase UID:",user.uid);
         fetchUserInfo(user?.uid);
+      }else{
+        setCurrentUser(null);
+        // setTimeout({ currentUser:null, isLoading: false });
       }
     });
 
     return () => {
       unSub();
     };
-  }, [fetchUserInfo]);
+  }, [fetchUserInfo, setCurrentUser]);
 
   console.log(currentUser, "iam a current user");
 
