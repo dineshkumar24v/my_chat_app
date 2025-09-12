@@ -3,13 +3,14 @@
   flex-direction: row;
   flex: 1;
   align-items: center; /* Vertically centers children like .seperator */
+  min-height: 80vh;
 }
 
 /* Separator for desktop */
 .seperator {
-  border-right: 2px solid rgb(203, 201, 201);
+  border-right: 1px solid rgb(203, 201, 201);
   margin: 0 20px;
-  height: 80%; /* Adjust this if needed */
+  height: 35rem; /* Percentages don’t work well unless the parent has an explicit height. */
   align-self: center; /* Ensures it's vertically centered individually */
 }
 
@@ -26,6 +27,7 @@
     margin: 20px 0;
     width: 80%; /* Optional: gives some horizontal space on mobile */
     height: auto; /* Reset height */
-    align-self: center; /* Center it horizontally */
+    /* align-self: center;  */
+    /* Center it horizontally */
   }
 }
