@@ -5,6 +5,8 @@ import {db} from "../../src/ConfigFirebase//ConfigFirebase"
 export const useUserStore = create((set) => ({
   currentUser: null,
   isLoading: true,
+
+  setCurrentUser: (user) => set({ currentUser: user, isLoading: false }),
   
   fetchUserInfo: async (uid) => {
     if (!uid) return set({ currentUser: null, isLoading: false });
@@ -13,7 +15,7 @@ export const useUserStore = create((set) => ({
       const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
       if(docSnap.exists()){
-        set({ currentUser: docSnap.data(), isLoading: false });
+        set({ currentUser: { id: uid, ...docSnap.data() }, isLoading: false });
         console.log("document data",docSnap.data())
       }else{
         set({ currentUser: null, isLoading: false });
