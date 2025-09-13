@@ -91,9 +91,10 @@ body {
 /* Mobile devices */
 @media (max-width: 768px) {
   .appContainer {
-    flex-direction: column;
-    width: 80vw;
-    height: 180vh;
+    flex-direction: row;
+    width: "auto || 100vw";
+    height: 100vh;
+    border-radius: 0;
   }
 
   body {
