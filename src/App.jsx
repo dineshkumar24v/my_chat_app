@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ContactListPanel from "./Components/ContactListPanel/ContactListPanel";
 import ChatPanel from "./Components/ChatPanel/ChatPanel";
 import DetailsPanel from "./Components/DetailsPanel/DetailsPanel";
@@ -16,6 +16,27 @@ const App = () => {
   const { currentUser, isLoading, fetchUserInfo, setCurrentUser } = useUserStore();
   const { chatId } = useChatStore();
 
+  // handling mobile view state for responsive design
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showChatOnMobile, setShowChatOnMobile] = useState(false);
+
+
+  // 📱 Handle screen resizing
+  useEffect(() => {
+    const handleResize = () => {
+      const isNowMobile = window.innerWidth <= 768;
+      setIsMobile(isNowMobile);
+
+      // Reset mobile view toggle when resizing to desktop
+      if (!isNowMobile) setShowChatOnMobile(false);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
+  //  Auth listener
   useEffect(() => {
     const unSub = onAuthStateChanged(authentication, (user) => {
       if (user) {
@@ -34,6 +55,7 @@ const App = () => {
 
   console.log(currentUser, "iam a current user");
 
+   //  Loading fallback
   if (isLoading) {
     return (
       <div className="loading">
@@ -47,9 +69,23 @@ const App = () => {
     <div className="appContainer">
       {!isLoading && currentUser ? (
         <>
+          {isMobile ? (
+            <>
+              {/*  Mobile View Logic */}
+              {!chatId || !showChatOnMobile ? (
+                <ContactListPanel onOpenChat={() => setShowChatOnMobile(true)} />
+              ) : (
+                <ChatPanel onBack={() => setShowChatOnMobile(false)} />
+              )}
+            </>
+          ) : (
+        <>
+        {/*  Desktop View Logic */}
           <ContactListPanel />
           {chatId && <ChatPanel />}
           {chatId && <DetailsPanel />}
+        </>
+          )}
         </>
       ) : (
         <Home />
