@@ -11,7 +11,7 @@ import { useUserStore } from '../../Zustand/userStore';
 // import { TiTickOutline } from "react-icons/ti";
 import axios from 'axios'; // ✅ You need to install axios
 
-const ChatPanel = () => {
+const ChatPanel = ({ onBack }) => {
 
   const [sendImage, setSentImage] = useState({file: null, url: ""})
 
@@ -142,7 +142,13 @@ const ChatPanel = () => {
     <div className='chatCont'>
       <div className='top'>
         <div className='user'>
+          {/* ✅ Show back button only on mobile */}
+          {onBack && (
+          <button className="backBtn" onClick={onBack}>←</button>
+          )}
+
           <img src={user?.avatar || 'user.png'}/>
+
           <div className='navTexts'>
             <span className='chatName'>{user?.username}</span>
             <p className='chatDesc'>Lorem Ipsum hasii sdkief</p>
