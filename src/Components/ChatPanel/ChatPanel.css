@@ -40,6 +40,16 @@
   display: flex;
   gap: 1rem;
 }
+ /*------ back button ------- */
+.backBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  margin-right: 8px;
+  cursor: pointer;
+  color: white;
+  display: block;
+}
 
 /* center */
 .center {
@@ -149,10 +159,13 @@ input {
 
 
 /* mobile view */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 769px) {
   .chatCont {
     flex: 1;
     height: 100vh;
+  }
+  .backBtn {
+    display: none;
   }
   
 }
