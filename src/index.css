@@ -93,7 +93,7 @@ body {
   .appContainer {
     flex-direction: row;
     width: "auto || 100vw";
-    height: 100vh;
+    height: 140vh;
     border-radius: 0;
   }
 
