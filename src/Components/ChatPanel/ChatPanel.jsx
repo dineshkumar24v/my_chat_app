@@ -195,12 +195,12 @@ const ChatPanel = ({ onBack }) => {
       {/* bottom *****************************/}
       <div className='bottom'>
         <div className='BottomIcons'>
-        <label htmlFor='file'>
-          <FaImage/>
-        </label>
-        <input type='file' id="file" style={{display:"none"}} onChange={handleSentImage}/>
-          <FaCameraRetro />
-          <FaMicrophone />
+          <label htmlFor='file'>
+            <FaImage size={20}/>
+          </label>
+          <input type='file' id="file" style={{display:"none"}} onChange={handleSentImage}/>
+            {/* <FaCameraRetro /> */}
+            {/* <FaMicrophone /> */}
         </div>
         <input
           type='text'
@@ -211,12 +211,12 @@ const ChatPanel = ({ onBack }) => {
           disabled={isCurrentUserBlocked || isReceiverBlocked}
         />
         <div className='emoji'>
-          <MdEmojiEmotions size={35} onClick={()=>setOpenEmoji(prev => !prev)}/>  {/* handling the state of emoji */}
+          <MdEmojiEmotions size={32} onClick={()=>setOpenEmoji(prev => !prev)}/>  {/* handling the state of emoji */}
           <div className='emojiCont'>
           <EmojiPicker open={openEmoji} onEmojiClick={handleEmoji}/>  {/* handling the onClickEmoji function of emoji */}
           </div>
         </div>
-        <button className='sendButton' onClick={handleSend} disabled={isCurrentUserBlocked || isReceiverBlocked}><IoMdSend size={35}/></button>
+        <button className='sendButton' onClick={handleSend} disabled={isCurrentUserBlocked || isReceiverBlocked}><IoMdSend /></button>
       </div>
     </div>
   )

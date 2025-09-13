@@ -125,7 +125,8 @@ import { useUserStore } from '../../../Zustand/userStore';
 import { doc, onSnapshot, getDoc, updateDoc } from "firebase/firestore";
 import { db } from '../../../ConfigFirebase/ConfigFirebase'
 
-const UserList = () => {
+
+const UserList = ({onSelectChat}) => {
   const [modalShow, setModalShow] = useState(false);
   const [chats, setChats] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -188,6 +189,9 @@ const UserList = () => {
   const handleSelect = useCallback(async (chat) => {
     if (!chat?.chatId || !currentUser?.id) return;
 
+    changeChat(chat.chatId, chat.user);
+    if (onSelectChat) onSelectChat(); // 👈 Trigger for mobile view toggle
+
     try {
       const userChats = chats.map(({ user, ...rest }) => rest);
       const chatIndex = userChats.findIndex((item) => item.chatId === chat.chatId);
@@ -202,7 +206,7 @@ const UserList = () => {
     } catch (err) {
       console.error("Error updating chat:", err);
     }
-  }, [chats, currentUser.id, changeChat]);
+  }, [chats, currentUser.id, changeChat, onSelectChat]);
 
   const filteredChats = chats.filter((c) =>
     c.user?.username?.toLowerCase().includes(searchInput.toLowerCase())
