@@ -1,55 +1,63 @@
-.userInfoCont{
+.userInfoCont {
   padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+  /* z-index: 10; */
+  /* background-color: transparent; */
+  /* min-height: 4.5rem; */
+  /* overflow: visible; */
 
-  img{
+  img {
     height: 2.5rem;
     width: 2.5rem;
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;
   }
-  
 }
-.user{
+.user {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-.icons{
+/* Separate container for dot menu to prevent layout shift */
+.icons {
   display: flex;
-  gap: 1rem;
+  /* gap: 1rem; */
   align-items: center;
-  position: relative;
+  /* position: relative; */
 }
 /* Dot icon + dropdown wrapper */
 .menu-container {
-  position: relative; /* anchor for dropdown */
-  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 1rem;
 }
-.icon{
+.icon {
   font-size: 2rem;
   cursor: pointer;
 }
 /* dropdown */
 .dropdown {
-  position: absolute;
-  top: 100%;  /* position directly below the icon */
-  right: 0;
-  margin-top: 10px;
+  /* position: relative; */
+  /* top: 100%; position directly below the icon 3 dots */
+  /* right: 0; */
+  /* margin-top: 8px; */
 
   background-color: rgba(17, 25, 40, 0.75);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(15px) saturate(180%);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  z-index: 999;
-  min-width: 140px;
+  z-index: 9999;
+  min-width: 120px;
   overflow: hidden;
+
+  /* prevent layout shift */
+  /* pointer-events: auto; */
 
   /* dropdown animation */
   opacity: 0;
@@ -71,7 +79,7 @@
   background-color: rgb(0, 0, 87);
   color: white;
   border: none;
-  text-align: left;
+  /* text-align: left; */
   cursor: pointer;
   margin: 2px 0;
   transition: background-color 0.2s ease-in-out;
@@ -80,18 +88,15 @@
 }
 
 .dropdown button:hover {
-  background-color: rgba(195, 1, 40, 0.856)
+  background-color: rgba(195, 1, 40, 0.856);
 }
-#blockBtn{
+#blockBtn {
   background-color: rgba(195, 3, 3, 0.7);
-  
-  &:hover{
+
+  &:hover {
     background-color: rgba(255, 75, 75, 0.7);
   }
 }
-
-
-
 
 /* Loading states */
 /* .userInfoCont.loading .user {
