@@ -13,13 +13,13 @@ import { useChatStore } from "./Zustand/chatStore";
 // import { Route,Routes } from 'react-router-dom'
 
 const App = () => {
-  const { currentUser, isLoading, fetchUserInfo, setCurrentUser } = useUserStore();
+  const { currentUser, isLoading, fetchUserInfo, setCurrentUser } =
+    useUserStore();
   const { chatId } = useChatStore();
 
   // handling mobile view state for responsive design
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [showChatOnMobile, setShowChatOnMobile] = useState(false);
-
 
   // 📱 Handle screen resizing
   useEffect(() => {
@@ -35,14 +35,13 @@ const App = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
   //  Auth listener
   useEffect(() => {
     const unSub = onAuthStateChanged(authentication, (user) => {
       if (user) {
-        console.log("Firebase UID:",user.uid);
+        console.log("Firebase UID:", user.uid);
         fetchUserInfo(user?.uid);
-      }else{
+      } else {
         setCurrentUser(null);
         // setTimeout({ currentUser:null, isLoading: false });
       }
@@ -55,7 +54,7 @@ const App = () => {
 
   console.log(currentUser, "iam a current user");
 
-   //  Loading fallback
+  //  Loading fallback
   if (isLoading) {
     return (
       <div className="loading">
@@ -73,18 +72,20 @@ const App = () => {
             <>
               {/*  Mobile View Logic */}
               {!chatId || !showChatOnMobile ? (
-                <ContactListPanel onOpenChat={() => setShowChatOnMobile(true)} />
+                <ContactListPanel
+                  onOpenChat={() => setShowChatOnMobile(true)}
+                />
               ) : (
                 <ChatPanel onBack={() => setShowChatOnMobile(false)} />
               )}
             </>
           ) : (
-        <>
-        {/*  Desktop View Logic */}
-          <ContactListPanel />
-          {chatId && <ChatPanel />}
-          {chatId && <DetailsPanel />}
-        </>
+            <>
+              {/*  Desktop View Logic */}
+              <ContactListPanel />
+              {chatId && <ChatPanel />}
+              {chatId && <DetailsPanel />}
+            </>
           )}
         </>
       ) : (
