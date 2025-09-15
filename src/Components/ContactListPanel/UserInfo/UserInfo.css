@@ -46,15 +46,23 @@
   /* right: 0; */
   /* margin-top: 8px; */
 
-  background-color: rgba(17, 25, 40, 0.75);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(15px) saturate(180%);
+  /* ✨ Glass effect */
+  background: rgba(255, 255, 255, 0.1); /* translucent */
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  /* background-color: rgba(36, 42, 52, 0.75); */
+  /* backdrop-filter: blur(15px) saturate(180%); */
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   z-index: 9999;
   min-width: 120px;
   overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   /* prevent layout shift */
   /* pointer-events: auto; */
@@ -76,12 +84,12 @@
   padding: 10px 15px;
   background: transparent;
   /* background-color: rgba(230, 74, 105, 0.553); */
-  background-color: rgb(0, 0, 87);
+  background-color: rgb(21, 21, 91);
   color: white;
   border: none;
   /* text-align: left; */
   cursor: pointer;
-  margin: 2px 0;
+  margin: 0.5rem;
   transition: background-color 0.2s ease-in-out;
   font-weight: 500;
   border-radius: 1rem;
@@ -91,7 +99,7 @@
   background-color: rgba(195, 1, 40, 0.856);
 }
 #blockBtn {
-  background-color: rgba(195, 3, 3, 0.7);
+  background-color: rgba(186, 23, 23, 0.7);
 
   &:hover {
     background-color: rgba(255, 75, 75, 0.7);
