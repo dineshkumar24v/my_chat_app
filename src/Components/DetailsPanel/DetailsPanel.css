@@ -1,6 +1,7 @@
 .detailsCont {
   flex: 1;
   /* overflow: scroll; */
+  display: none;
 
   img {
     height: 2.5rem;
@@ -103,6 +104,6 @@
 /* Mobile view (stacked vertically) */
 @media (max-width: 768px) {
   .detailsCont{
-    display: none;
+    /* display: block; */
   }
 }
