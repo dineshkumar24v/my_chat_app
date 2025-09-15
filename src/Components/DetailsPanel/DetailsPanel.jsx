@@ -41,6 +41,7 @@ const DetailsPanel = () => {
       console.error("Error signing out:", error);
     }
   }
+  
   return (
     <div className='detailsCont'>
       <div className='userDetails'>
