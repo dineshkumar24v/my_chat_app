@@ -63,6 +63,7 @@ const UserInfo = () => {
         <h2>{currentUser.username}</h2>
       </div>
 
+  {/* Absolutely-positioned container for icons */}
       <div className="icons" >
         <div className="menu-container" ref={dropdownRef}>
         <HiOutlineDotsHorizontal
