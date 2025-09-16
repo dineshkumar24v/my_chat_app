@@ -8,6 +8,7 @@ import {
   FaCameraRetro,
   FaMicrophone,
 } from "react-icons/fa6";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdEmojiEmotions } from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
 import EmojiPicker from "emoji-picker-react";
@@ -169,9 +170,10 @@ const ChatPanel = ({ onBack }) => {
           </div>
         </div>
         <div className="icons">
-          <FaPhone />
-          <FaVideo />
-          <FaCircleInfo />
+          <FaVideo size={18}/>
+          <FaPhone  size={16}/>
+          {/* <FaCircleInfo /> */}
+          <BsThreeDotsVertical  size={20}/>
         </div>
       </div>
       {/* center *****************/}
