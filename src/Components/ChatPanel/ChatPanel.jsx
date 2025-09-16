@@ -211,7 +211,19 @@ const ChatPanel = ({ onBack }) => {
       {/* bottom *****************************/}
       <div className="bottom">
         <div className="BottomIcons">
-          <label htmlFor="file">
+          <label
+            htmlFor="file"
+            onClick={(e) => {
+              if (isCurrentUserBlocked || isReceiverBlocked) {
+                e.preventDefault();
+              }
+            }}
+            className={
+              isCurrentUserBlocked || isReceiverBlocked
+                ? "media-icon-disabled"
+                : "media-icon-enabled"
+            }
+          >
             <FaImage size={20} />
           </label>
           <input
