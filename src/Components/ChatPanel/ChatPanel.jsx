@@ -164,8 +164,8 @@ const ChatPanel = ({ onBack }) => {
           <img src={user?.avatar || "user.png"} />
 
           <div className="navTexts">
-            <span className="chatName">{user?.username}</span>
-            <p className="chatDesc">Lorem Ipsum hasii sdkief</p>
+            <span className="chatName">{user?.username || "User"}</span>
+            <p className="chatDesc">Lorem Ipsum hasii</p>
           </div>
         </div>
         <div className="icons">
