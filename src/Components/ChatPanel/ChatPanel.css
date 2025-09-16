@@ -152,6 +152,7 @@ input::placeholder {
 .emoji {
   cursor: pointer;
   position: relative;
+
 }
 .emojiCont {
   position: absolute;
@@ -160,6 +161,7 @@ input::placeholder {
   max-width: 300px;
   width: 90vw;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
 }
 
 .sendButton {
