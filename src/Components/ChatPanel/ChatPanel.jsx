@@ -1,58 +1,68 @@
-import React, { useEffect, useState , useRef} from 'react'
-import './ChatPanel.css'
-import { FaPhone, FaVideo, FaCircleInfo, FaImage, FaCameraRetro, FaMicrophone} from "react-icons/fa6";
+import React, { useEffect, useState, useRef } from "react";
+import "./ChatPanel.css";
+import {
+  FaPhone,
+  FaVideo,
+  FaCircleInfo,
+  FaImage,
+  FaCameraRetro,
+  FaMicrophone,
+} from "react-icons/fa6";
 import { MdEmojiEmotions } from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
-import EmojiPicker from 'emoji-picker-react';
-import { onSnapshot, doc, arrayUnion, updateDoc,getDoc } from 'firebase/firestore';
-import {db} from '../../ConfigFirebase/ConfigFirebase'
-import { useChatStore } from '../../Zustand/chatStore';
-import { useUserStore } from '../../Zustand/userStore';
+import EmojiPicker from "emoji-picker-react";
+import {
+  onSnapshot,
+  doc,
+  arrayUnion,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore";
+import { db } from "../../ConfigFirebase/ConfigFirebase";
+import { useChatStore } from "../../Zustand/chatStore";
+import { useUserStore } from "../../Zustand/userStore";
 // import { TiTickOutline } from "react-icons/ti";
-import axios from 'axios'; // ✅ You need to install axios
+import axios from "axios"; // ✅ You need to install axios
 
 const ChatPanel = ({ onBack }) => {
-
-  const [sendImage, setSentImage] = useState({file: null, url: ""})
+  const [sendImage, setSentImage] = useState({ file: null, url: "" });
 
   const [chat, setChat] = useState();
-  
-  const [openEmoji,setOpenEmoji] = useState(false)  // setting state for emojis
-  const [writeText,setWriteText] = useState("")  // setting state for input text
-  
 
-  const {currentUser} = useUserStore();
-  const {chatId, user,isReceiverBlocked, isCurrentUserBlocked } = useChatStore();
+  const [openEmoji, setOpenEmoji] = useState(false); // setting state for emojis
+  const [writeText, setWriteText] = useState(""); // setting state for input text
 
+  const { currentUser } = useUserStore();
+  const { chatId, user, isReceiverBlocked, isCurrentUserBlocked } =
+    useChatStore();
 
-  const endRef = useRef(null);  // useRef hook
+  const endRef = useRef(null); // useRef hook
 
   // Sometimes, the first render might not have any messages, so scrollIntoView does nothing. You can make sure to only run the scroll when chat?.messages?.length is non-zero.
 
   useEffect(() => {
-  if (chat?.messages?.length > 0) {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }
-}, [chat?.messages]);
+    if (chat?.messages?.length > 0) {
+      endRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chat?.messages]);
 
-  useEffect(()=>{
-    const unSub = onSnapshot(doc(db, "chats", chatId), (res)=>{
-  setChat(res.data());
-  }
-);
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
+      setChat(res.data());
+    });
 
-  return () =>{
-    unSub();
-  };
-  },[chatId])
-  console.log(chat)
+    return () => {
+      unSub();
+    };
+  }, [chatId]);
+  console.log(chat);
 
-// sending an image code
-  const handleSentImage = e => {
+  // sending an image code
+  const handleSentImage = (e) => {
     if (e.target.files[0]) {
       setSentImage({
         file: e.target.files[0],
-        url: URL.createObjectURL(e.target.files[0])
+        url: URL.createObjectURL(e.target.files[0]),
       });
     }
   };
@@ -64,11 +74,13 @@ const ChatPanel = ({ onBack }) => {
     data.append("cloud_name", "dmrgvxawa"); // 🔁 Replace with your Cloudinary cloud name
 
     // 👇 Store in a user-specific folder
-   data.append("folder", `users/${uid}/avatar`);
-
+    data.append("folder", `users/${uid}/avatar`);
 
     try {
-      const res = await axios.post("https://api.cloudinary.com/v1_1/dmrgvxawa/image/upload", data);
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dmrgvxawa/image/upload",
+        data
+      );
       return res.data.secure_url; // ✅ returns the uploaded image URL
     } catch (error) {
       console.error("Cloudinary upload error:", error);
@@ -76,57 +88,57 @@ const ChatPanel = ({ onBack }) => {
     }
   };
 
-  const handleEmoji = (e)=>{
-    console.log(e) // consoling the emoji click event --> we get an object with emoji as key value pair
-    setWriteText(prev => prev+ e.emoji) // here emoji is the key w
-    setOpenEmoji(false)
-  }
-  console.log(writeText) // consoling the text input
+  const handleEmoji = (e) => {
+    console.log(e); // consoling the emoji click event --> we get an object with emoji as key value pair
+    setWriteText((prev) => prev + e.emoji); // here emoji is the key w
+    setOpenEmoji(false);
+  };
+  console.log(writeText); // consoling the text input
 
-  const handleSend = async ()=>{
-    if(writeText === "") return; 
+  const handleSend = async () => {
+    if (writeText === "") return;
 
     let imgURL = null;
-    
-    try{
-      if(sendImage.file) {
-        imgURL =await uploadToCloudinary(sendImage.file)
+
+    try {
+      if (sendImage.file) {
+        imgURL = await uploadToCloudinary(sendImage.file);
       }
 
-      await updateDoc(doc(db, "chats", chatId),{
-          messages:arrayUnion({
+      await updateDoc(doc(db, "chats", chatId), {
+        messages: arrayUnion({
           senderId: currentUser.id,
           text: writeText,
-          createdAt: new Date(), 
-          ...(imgURL && { img: imgURL}),
+          createdAt: new Date(),
+          ...(imgURL && { img: imgURL }),
         }),
       });
 
       const userIDs = [currentUser.id, user.id];
 
-      userIDs.forEach(async (id)=>{
+      userIDs.forEach(async (id) => {
+        const userChatsRef = doc(db, "userChats", id);
+        const userChatsSnapshot = await getDoc(userChatsRef);
 
-        const userChatsRef = doc(db, "userChats", id)
-        const userChatsSnapshot = await getDoc(userChatsRef)
-        
-        if(userChatsSnapshot.exists()){
-          const userChatsData = userChatsSnapshot.data()
-          
-          const chatIndex = userChatsData.chats.findIndex(c=> c.chatId === chatId)
-          
+        if (userChatsSnapshot.exists()) {
+          const userChatsData = userChatsSnapshot.data();
+
+          const chatIndex = userChatsData.chats.findIndex(
+            (c) => c.chatId === chatId
+          );
+
           userChatsData.chats[chatIndex].lastMessage = writeText;
-          userChatsData.chats[chatIndex].isSeen = id === currentUser.id ? true : false;
-          userChatsData.chats[chatIndex].updatedAt = Date.now(); 
-          
+          userChatsData.chats[chatIndex].isSeen =
+            id === currentUser.id ? true : false;
+          userChatsData.chats[chatIndex].updatedAt = Date.now();
+
           await updateDoc(userChatsRef, {
-            chats:userChatsData.chats, 
-          })
+            chats: userChatsData.chats,
+          });
         }
-
       });
-
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
 
     setSentImage({
@@ -135,34 +147,35 @@ const ChatPanel = ({ onBack }) => {
     });
 
     setWriteText("");
-  }
+  };
 
   return (
     // top
-    <div className='chatCont'>
-      <div className='top'>
-        <div className='user'>
+    <div className="chatCont">
+      <div className="top">
+        <div className="user">
           {/* ✅ Show back button only on mobile */}
           {onBack && (
-          <button className="backBtn" onClick={onBack}>←</button>
+            <button className="backBtn" onClick={onBack}>
+              ←
+            </button>
           )}
 
-          <img src={user?.avatar || 'user.png'}/>
+          <img src={user?.avatar || "user.png"} />
 
-          <div className='navTexts'>
-            <span className='chatName'>{user?.username}</span>
-            <p className='chatDesc'>Lorem Ipsum hasii sdkief</p>
+          <div className="navTexts">
+            <span className="chatName">{user?.username}</span>
+            <p className="chatDesc">Lorem Ipsum hasii sdkief</p>
           </div>
         </div>
-        <div className='icons'>
-          <FaPhone/>
-          <FaVideo/>
-          <FaCircleInfo/>
+        <div className="icons">
+          <FaPhone />
+          <FaVideo />
+          <FaCircleInfo />
         </div>
       </div>
       {/* center *****************/}
-      <div className='center'>
-        
+      <div className="center">
         {/* <div className='myMessage'>
           <div className='msgTexts'>
             <p>lorem kjdjhskjdvhsv ksdvks sgdksd sdkshdv dkshdv kdkjs </p>
@@ -170,56 +183,89 @@ const ChatPanel = ({ onBack }) => {
           </div>
         </div> */}
 
-       { chat?.messages?.map((message)=>(
-
-        <div className={message.senderId === currentUser?.id ? "myMessage" : "message"} key={message?.createdAt}>
-          {message.img && <img src={message.img}/>}
-          <div className='msgTexts'>
-            <p>{message.text} </p>
-            {/* <span>1 min ago</span> */}
+        {chat?.messages?.map((message) => (
+          <div
+            className={
+              message.senderId === currentUser?.id ? "myMessage" : "message"
+            }
+            key={message?.createdAt}
+          >
+            {message.img && <img src={message.img} />}
+            <div className="msgTexts">
+              <p>{message.text} </p>
+              {/* <span>1 min ago</span> */}
+            </div>
           </div>
-        </div>
-       ))
-       }
+        ))}
 
-       { sendImage.url && (
-        <div className='myMessage'> 
-        <div className='msgTexts'>
-          <img src={sendImage.url}/>
-        </div>
-      </div>
-      )}
-        
-        <div ref={endRef}></div> 
+        {sendImage.url && (
+          <div className="myMessage">
+            <div className="msgTexts">
+              <img src={sendImage.url} />
+            </div>
+          </div>
+        )}
+
+        <div ref={endRef}></div>
       </div>
       {/* bottom *****************************/}
-      <div className='bottom'>
-        <div className='BottomIcons'>
-          <label htmlFor='file'>
-            <FaImage size={20}/>
+      <div className="bottom">
+        <div className="BottomIcons">
+          <label htmlFor="file">
+            <FaImage size={20} />
           </label>
-          <input type='file' id="file" style={{display:"none"}} onChange={handleSentImage}/>
-            {/* <FaCameraRetro /> */}
-            {/* <FaMicrophone /> */}
+          <input
+            type="file"
+            id="file"
+            style={{ display: "none" }}
+            onChange={handleSentImage}
+          />
+          {/* <FaCameraRetro /> */}
+          {/* <FaMicrophone /> */}
         </div>
         <input
-          type='text'
-          placeholder={isCurrentUserBlocked || isReceiverBlocked ? "You cannot send a message" : 'Type a message....'}
+          type="text"
+          placeholder={
+            isCurrentUserBlocked || isReceiverBlocked
+              ? "You cannot send a message"
+              : "Type a message...."
+          }
           value={writeText}
-          onChange={e => setWriteText(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+          onChange={(e) => setWriteText(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSend()}
           disabled={isCurrentUserBlocked || isReceiverBlocked}
         />
-        <div className='emoji'>
-          <MdEmojiEmotions size={32} onClick={()=>setOpenEmoji(prev => !prev)}/>  {/* handling the state of emoji */}
-          <div className='emojiCont'>
-          <EmojiPicker open={openEmoji} onEmojiClick={handleEmoji}/>  {/* handling the onClickEmoji function of emoji */}
+        <div className="emoji">
+          <MdEmojiEmotions
+            size={32}
+            onClick={() => {
+              if (isCurrentUserBlocked || isReceiverBlocked) return;
+              setOpenEmoji((prev) => !prev);
+            }}
+            style={{
+              cursor:
+                isCurrentUserBlocked || isReceiverBlocked
+                  ? "not-allowed"
+                  : "pointer",
+              opacity: isCurrentUserBlocked || isReceiverBlocked ? 0.5 : 1,
+            }}
+          />
+          {/* handling the state of emoji */}
+          <div className="emojiCont">
+            <EmojiPicker open={openEmoji} onEmojiClick={handleEmoji} />{" "}
+            {/* handling the onClickEmoji function of emoji */}
           </div>
         </div>
-        <button className='sendButton' onClick={handleSend} disabled={isCurrentUserBlocked || isReceiverBlocked}><IoMdSend /></button>
+        <button
+          className="sendButton"
+          onClick={handleSend}
+          disabled={isCurrentUserBlocked || isReceiverBlocked}
+        >
+          <IoMdSend />
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ChatPanel
+export default ChatPanel;
