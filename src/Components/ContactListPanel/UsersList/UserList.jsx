@@ -31,21 +31,21 @@
 
 //         const user = userDocSnap.data();
 
-//         return {...item, user} 
+//         return {...item, user}
 //       })
 
 //         const chatData = await Promise.all(promises)
-//         setChats(chatData.sort((a,b)=>b.updatedAt - a.updatedAt)); 
+//         setChats(chatData.sort((a,b)=>b.updatedAt - a.updatedAt));
 //     });
 
 //       return ()=>{
 //         unSub()
 //       }
 //   },[currentUser.id]);
-//   // console.log(chats)  
+//   // console.log(chats)
 
 //   const handleSelect = async (chat)=>{
-    
+
 //     const userChats = chats.map((item)=>{
 //       const {user, ...rest} = item;
 //       return rest;
@@ -79,7 +79,7 @@
 //     // search bar
 //     <div className='userListCont'>
 //       <div className='search'>
-//         <div className='searchBar'> 
+//         <div className='searchBar'>
 //           <IoSearchSharp className='searchIcon'/>       {/* Search Bar */}
 //           <input type='text' placeholder='Search....' className='searchInput'
 //             onChange={(e)=>setSearchInput(e.target.value)}
@@ -88,8 +88,8 @@
 //         <div>
 //           {/* {plusState ? <FaMinus className='plusIcon' onClick={()=>setPlusState((prev) =>!prev)}/>: <FaPlus className='plusIcon' onClick={()=>setPlusState((prev) =>!prev)}  />} */}
 
-//           <FaPlus className='plusIcon' onClick={() => setModalShow(true)} />         
-     
+//           <FaPlus className='plusIcon' onClick={() => setModalShow(true)} />
+
 //         </div>
 //       </div>
 
@@ -104,7 +104,6 @@
 //         </div>
 //       </div>
 //     ))}
-   
 
 //      {/* Modal Component */}
 //      <AddUser show={modalShow} onHide={() => setModalShow(false)} />
@@ -113,20 +112,18 @@
 // }
 // export default UserList
 
-
-import React, { useEffect, useCallback } from 'react'
-import './UserList.css'
+import React, { useEffect, useCallback } from "react";
+import "./UserList.css";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa6";
-import { useState } from 'react';
-import AddUser from './addUser/AddUser';
-import { useChatStore } from '../../../Zustand/chatStore';
-import { useUserStore } from '../../../Zustand/userStore';
+import { useState } from "react";
+import AddUser from "./addUser/AddUser";
+import { useChatStore } from "../../../Zustand/chatStore";
+import { useUserStore } from "../../../Zustand/userStore";
 import { doc, onSnapshot, getDoc, updateDoc } from "firebase/firestore";
-import { db } from '../../../ConfigFirebase/ConfigFirebase'
+import { db } from "../../../ConfigFirebase/ConfigFirebase";
 
-
-const UserList = ({onSelectChat}) => {
+const UserList = ({ onSelectChat }) => {
   const [modalShow, setModalShow] = useState(false);
   const [chats, setChats] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -137,9 +134,12 @@ const UserList = ({onSelectChat}) => {
   const { chatId, changeChat } = useChatStore();
   console.log(chatId);
 
-  const isUserBlocked = useCallback((user) => {
-    return user?.blocked?.includes(currentUser.id);
-  }, [currentUser.id]);
+  const isUserBlocked = useCallback(
+    (user) => {
+      return user?.blocked?.includes(currentUser.id);
+    },
+    [currentUser.id]
+  );
 
   useEffect(() => {
     if (!currentUser?.id) return;
@@ -158,7 +158,7 @@ const UserList = ({onSelectChat}) => {
             try {
               const userDocRef = doc(db, "users", item.receiverId);
               const userDocSnap = await getDoc(userDocRef);
-              return userDocSnap.exists() 
+              return userDocSnap.exists()
                 ? { ...item, user: userDocSnap.data() }
                 : null;
             } catch (err) {
@@ -186,27 +186,32 @@ const UserList = ({onSelectChat}) => {
     return () => unSub();
   }, [currentUser.id]);
 
-  const handleSelect = useCallback(async (chat) => {
-    if (!chat?.chatId || !currentUser?.id) return;
+  const handleSelect = useCallback(
+    async (chat) => {
+      if (!chat?.chatId || !currentUser?.id) return;
 
-    changeChat(chat.chatId, chat.user);
-    if (onSelectChat) onSelectChat(); // 👈 Trigger for mobile view toggle
-
-    try {
-      const userChats = chats.map(({ user, ...rest }) => rest);
-      const chatIndex = userChats.findIndex((item) => item.chatId === chat.chatId);
-
-      if (chatIndex === -1) return;
-
-      userChats[chatIndex].isSeen = true;
-      const userChatsRef = doc(db, "userChats", currentUser.id);
-
-      await updateDoc(userChatsRef, { chats: userChats });
       changeChat(chat.chatId, chat.user);
-    } catch (err) {
-      console.error("Error updating chat:", err);
-    }
-  }, [chats, currentUser.id, changeChat, onSelectChat]);
+      if (onSelectChat) onSelectChat(); // 👈 Trigger for mobile view toggle
+
+      try {
+        const userChats = chats.map(({ user, ...rest }) => rest);
+        const chatIndex = userChats.findIndex(
+          (item) => item.chatId === chat.chatId
+        );
+
+        if (chatIndex === -1) return;
+
+        userChats[chatIndex].isSeen = true;
+        const userChatsRef = doc(db, "userChats", currentUser.id);
+
+        await updateDoc(userChatsRef, { chats: userChats });
+        changeChat(chat.chatId, chat.user);
+      } catch (err) {
+        console.error("Error updating chat:", err);
+      }
+    },
+    [chats, currentUser.id, changeChat, onSelectChat]
+  );
 
   const filteredChats = chats.filter((c) =>
     c.user?.username?.toLowerCase().includes(searchInput.toLowerCase())
@@ -216,26 +221,26 @@ const UserList = ({onSelectChat}) => {
   if (error) return <div className="userListCont">{error}</div>;
 
   return (
-    <div className='userListCont'>
-      <div className='search'>
-        <div className='searchBar'> 
-          <IoSearchSharp className='searchIcon'/>
-          <input 
-            type='text' 
-            title='search for users'
-            placeholder='Search....' 
-            className='searchInput'
+    <div className="userListCont">
+      <div className="search">
+        <div className="searchBar">
+          <IoSearchSharp className="searchIcon" />
+          <input
+            type="text"
+            title="search for users"
+            placeholder="Search...."
+            className="searchInput"
             onChange={(e) => setSearchInput(e.target.value)}
             value={searchInput}
           />
         </div>
         <div>
-          <FaPlus 
-            className='plusIcon' 
-            title='add user'
-            onClick={() => setModalShow(true)} 
+          <FaPlus
+            className="plusIcon"
+            title="add user"
+            onClick={() => setModalShow(true)}
             aria-label="Add user"
-          />         
+          />
         </div>
       </div>
 
@@ -243,22 +248,28 @@ const UserList = ({onSelectChat}) => {
         <div className="no-chats">No chats found</div>
       ) : (
         filteredChats.map((chat) => (
-          <div 
-            className='userList' 
-            key={chat.chatId} 
+          <div
+            className="userList"
+            key={chat.chatId}
             onClick={() => handleSelect(chat)}
             style={{
               backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
               borderRadius: "10px",
-              marginBottom: "2px"
+              marginBottom: "2px",
             }}
           >
-            <img 
-              src={isUserBlocked(chat.user) ? "user.png" : chat.user?.avatar || 'user.png'} 
-              alt={chat.user?.username || 'User'}
+            <img
+              src={
+                isUserBlocked(chat.user)
+                  ? "user.png"
+                  : chat.user?.avatar || "user.png"
+              }
+              alt={chat.user?.username || "User"}
             />
-            <div className='userTexts'>
-              <span>{isUserBlocked(chat.user) ? "User" : chat.user?.username}</span>
+            <div className="userTexts">
+              <span>
+                {isUserBlocked(chat.user) ? "User" : chat.user?.username}
+              </span>
               <p>{chat.lastMessage}</p>
             </div>
           </div>
