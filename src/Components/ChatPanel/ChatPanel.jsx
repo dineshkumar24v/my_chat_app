@@ -202,7 +202,7 @@ const ChatPanel = ({ onBack }) => {
             />
 
             {dropdownOpen && (
-              <div className="dropdown">
+              <div id="user-dropdown">
                 <button onClick={handleBlockUser} id="blockBtn">
                   {isCurrentUserBlocked
                     ? "You are Blocked!"
@@ -210,6 +210,8 @@ const ChatPanel = ({ onBack }) => {
                     ? "Unblock User"
                     : "Block User"}
                 </button>
+                <button>Clear chat</button>
+                <button>Contact Info</button>
               </div>
             )}
           </div>
