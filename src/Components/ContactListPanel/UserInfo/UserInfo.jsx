@@ -6,16 +6,15 @@ import { FaEdit } from "react-icons/fa";
 import { useUserStore } from "../../../Zustand/userStore";
 import { authentication } from "../../../ConfigFirebase/ConfigFirebase";
 import { toast } from "react-toastify";
-import { useChatStore } from "../../../Zustand/chatStore";
-import { updateDoc, doc, arrayRemove, arrayUnion } from "firebase/firestore";
-import { db } from "../../../ConfigFirebase/ConfigFirebase";
+// import { useChatStore } from "../../../Zustand/chatStore";
+// import { updateDoc, doc, arrayRemove, arrayUnion } from "firebase/firestore";
+// import { db } from "../../../ConfigFirebase/ConfigFirebase";
 
 const UserInfo = () => {
   const { currentUser } = useUserStore();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const { user, isReceiverBlocked,isCurrentUserBlocked, changeBlock } = useChatStore();
 
   // Handle outside click to close dropdown
   useEffect(() => {
@@ -40,22 +39,6 @@ const UserInfo = () => {
       console.error("Error signing out:", error);
     }
   };
-
-  const handleBlockUser = async () => {
-    if (!user) return;
-
-    const userDocRef = doc(db, "users", currentUser.id);
-
-    try {
-      await updateDoc(userDocRef, {
-        blocked: isReceiverBlocked ? arrayRemove(user.id) : arrayUnion(user.id),
-      });
-      changeBlock();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <div className="userInfoCont">
       <div className="user">
@@ -74,9 +57,6 @@ const UserInfo = () => {
         {dropdownOpen && (
           <div className="dropdown">
             <button onClick={handleLogout}>Logout</button>
-            <button onClick={handleBlockUser} id="blockBtn">
-              {isCurrentUserBlocked ? "You are Blocked!" : isReceiverBlocked ? "Unblock User"  : "Block User"} 
-            </button>
           </div>
         )}
         </div>
