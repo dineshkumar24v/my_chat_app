@@ -4,10 +4,6 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  /* z-index: 10; */
-  /* background-color: transparent; */
-  /* min-height: 4.5rem; */
-  /* overflow: visible; */
 
   img {
     height: 2.5rem;
@@ -41,10 +37,6 @@
 }
 /* dropdown */
 .dropdown {
-  /* position: relative; */
-  /* top: 100%; position directly below the icon 3 dots */
-  /* right: 0; */
-  /* margin-top: 8px; */
 
   /* ✨ Glass effect */
   background: rgba(255, 255, 255, 0.1); /* translucent */
