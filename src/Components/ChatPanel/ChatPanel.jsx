@@ -16,6 +16,7 @@ import {
   onSnapshot,
   doc,
   arrayUnion,
+  arrayRemove,
   updateDoc,
   getDoc,
 } from "firebase/firestore";
@@ -34,10 +35,14 @@ const ChatPanel = ({ onBack }) => {
   const [writeText, setWriteText] = useState(""); // setting state for input text
 
   const { currentUser } = useUserStore();
-  const { chatId, user, isReceiverBlocked, isCurrentUserBlocked } =
+  const { chatId, user, isReceiverBlocked, isCurrentUserBlocked, changeBlock } =
     useChatStore();
 
   const endRef = useRef(null); // useRef hook
+
+  // dropdown state and ref
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // Sometimes, the first render might not have any messages, so scrollIntoView does nothing. You can make sure to only run the scroll when chat?.messages?.length is non-zero.
 
@@ -150,6 +155,22 @@ const ChatPanel = ({ onBack }) => {
     setWriteText("");
   };
 
+  // block user functionality
+  const handleBlockUser = async () => {
+    if (!user) return;
+
+    const userDocRef = doc(db, "users", currentUser.id);
+
+    try {
+      await updateDoc(userDocRef, {
+        blocked: isReceiverBlocked ? arrayRemove(user.id) : arrayUnion(user.id),
+      });
+      changeBlock();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     // top
     <div className="chatCont">
@@ -170,10 +191,28 @@ const ChatPanel = ({ onBack }) => {
           </div>
         </div>
         <div className="icons">
-          <FaVideo size={18}/>
-          <FaPhone  size={16}/>
-          {/* <FaCircleInfo /> */}
-          <BsThreeDotsVertical  size={20}/>
+          <FaVideo size={18} />
+          <FaPhone size={16} />
+
+          <div className="menu-container" ref={dropdownRef}>
+            <BsThreeDotsVertical
+              size={20}
+              className="icon"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            />
+
+            {dropdownOpen && (
+              <div className="dropdown">
+                <button onClick={handleBlockUser} id="blockBtn">
+                  {isCurrentUserBlocked
+                    ? "You are Blocked!"
+                    : isReceiverBlocked
+                    ? "Unblock User"
+                    : "Block User"}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       {/* center *****************/}
