@@ -3,9 +3,6 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
   padding-left: .6rem;
-  /* position: relative !important;
-  z-index: 1;
-  overflow-y: auto !important; */
 }
 .search{
   display: flex;
