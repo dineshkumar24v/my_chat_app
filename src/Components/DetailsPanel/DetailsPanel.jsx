@@ -1,99 +1,106 @@
-import React from 'react'
-import './DetailsPanel.css'
-import { IoIosArrowDropupCircle , IoIosArrowDropdownCircle , IoMdDownload} from "react-icons/io";
-import { authentication } from '../../ConfigFirebase/ConfigFirebase';
-import { useUserStore } from '../../Zustand/userStore';
-import { useChatStore } from '../../Zustand/chatStore';
-import { toast } from 'react-toastify'
-import { updateDoc, doc, arrayRemove, arrayUnion } from 'firebase/firestore';
-import {db} from "../../ConfigFirebase/ConfigFirebase"
+import React from "react";
+import "./DetailsPanel.css";
+import {
+  IoIosArrowDropupCircle,
+  IoIosArrowDropdownCircle,
+  IoMdDownload,
+} from "react-icons/io";
+// import { authentication } from "../../ConfigFirebase/ConfigFirebase";
+import { useUserStore } from "../../Zustand/userStore";
+import { useChatStore } from "../../Zustand/chatStore";
+import { toast } from "react-toastify";
+import { updateDoc, doc, arrayRemove, arrayUnion } from "firebase/firestore";
+import { db } from "../../ConfigFirebase/ConfigFirebase";
 
-const DetailsPanel = () => {
-  
-  const {user, isReceiverBlocked, isCurrentUserBlocked, changeBlock} = useChatStore();
+// passing props from ChatPanel
+const DetailsPanel = ({ onBack }) => {
+  const { user, isReceiverBlocked, isCurrentUserBlocked, changeBlock } =
+    useChatStore();
 
-  const {currentUser} = useUserStore();``
+  const { currentUser } = useUserStore();
+  ``;
 
-  const handleBlockUser = async ()=>{
-    if(!user) return;
+  const handleBlockUser = async () => {
+    if (!user) return;
 
     const userDocRef = doc(db, "users", currentUser.id);
 
-    try{
+    try {
       await updateDoc(userDocRef, {
         blocked: isReceiverBlocked ? arrayRemove(user.id) : arrayUnion(user.id),
       });
-      changeBlock()
-
-    }catch(err){
+      changeBlock();
+    } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleReportUser = () => {
+    // Implement your report user logic here
+    toast.info("User reported. Thank you for your feedback.");
   }
 
-  const handleLogout = async ()=>{
-    try {
-      await authentication.signOut();
-      // Force reset any local state if needed
-      useUserStore.getState().fetchUserInfo(null); 
-      console.log("User signed out successfully");
-      toast.success("LoggedOut Successfully") 
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  }
-  
   return (
-    <div className='detailsCont'>
-      <div className='userDetails'>
-        <img src={user?.avatar ||'user.png'} alt='image'/>
+    <div className="detailsCont">
+      <div className="detailsHeader">
+        {onBack && (
+          <button id="detailsBackBtn" onClick={onBack}>
+            ←
+          </button>
+        )}
+      <div style={{ flex: 1 }}>
+        <div className="userDetails">
+        <img src={user?.avatar || "user.png"} alt="image" />
         <h2>{user?.username}</h2>
-        <p>Lorem ipsum himnd</p>
+        <p>Urgent calls only</p>
       </div>
-      <div className='userInfoCont'>
-        <div className='option'>
-          <div className='title'>
+      </div>
+      </div>
+      <div className="userInfoCont">
+        <div className="option">
+          <div className="title">
             <span>Chat Settings</span>
-            <IoIosArrowDropupCircle className='icon'/>
+            <IoIosArrowDropupCircle className="icon" />
           </div>
         </div>
-        <div className='option'>
-          <div className='title'>
+        <div className="option">
+          <div className="title">
             <span>Chat Settings</span>
-            <IoIosArrowDropupCircle className='icon'/>
+            <IoIosArrowDropupCircle className="icon" />
           </div>
         </div>
-        <div className='option'>
-          <div className='title'>
+        <div className="option">
+          <div className="title">
             <span>Privacy & help</span>
-            <IoIosArrowDropupCircle className='icon'/>
+            <IoIosArrowDropupCircle className="icon" />
           </div>
         </div>
-        <div className='option'>
-          <div className='title'>
+        <div className="option">
+          <div className="title">
             <span>Shared Photos</span>
-            <IoIosArrowDropdownCircle className='icon'/>
+            <IoIosArrowDropdownCircle className="icon" />
           </div>
-          <div className='photos'>
-            <div className='photoItem'>
-              <div className='photoDetail'>
-                <img src='img.jpg' id='sharedImg'/>
+          <div className="photos">
+            <div className="photoItem">
+              <div className="photoDetail">
+                <img src="img.jpg" id="sharedImg" />
                 <span>Photo</span>
               </div>
-            <IoMdDownload className='icon'/>
+              <IoMdDownload className="icon" />
             </div>
-            <div className='photoItem'>
-              <div className='photoDetail'>
-                <img src='img.jpg' id='sharedImg'/>
+            <div className="photoItem">
+              <div className="photoDetail">
+                <img src="img.jpg" id="sharedImg" />
                 <span>Photo</span>
               </div>
-            <IoMdDownload className='icon'/>
+              <IoMdDownload className="icon" />
             </div>
-            <div className='photoItem'>
-              <div className='photoDetail'>
-                <img src='img.jpg' id='sharedImg'/>
+            <div className="photoItem">
+              <div className="photoDetail">
+                <img src="img.jpg" id="sharedImg" />
                 <span>Photo</span>
               </div>
-            <IoMdDownload className='icon'/>
+              <IoMdDownload className="icon" />
             </div>
             {/* <div className='photoItem'>
               <div className='photoDetail'>
@@ -104,19 +111,25 @@ const DetailsPanel = () => {
             </div> */}
           </div>
         </div>
-        <div className='option'>
-          <div className='title'>
+        <div className="option">
+          <div className="title">
             <span>Shared Files</span>
-            <IoIosArrowDropupCircle className='icon'/>
+            <IoIosArrowDropupCircle className="icon" />
           </div>
         </div>
         <button onClick={handleBlockUser}>
-          {isCurrentUserBlocked ? "You are Blocked!" : isReceiverBlocked ? "User Blocked" : "Block User"} 
+          {isCurrentUserBlocked
+            ? "You are Blocked!"
+            : isReceiverBlocked
+            ? "Unblock User"
+            : "Block User"}
         </button>
-        <button id='logout' onClick={handleLogout}>Logout</button>  
+        <button onClick={handleReportUser}>
+          Report user
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DetailsPanel
+export default DetailsPanel;
