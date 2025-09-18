@@ -26,7 +26,8 @@ import { useUserStore } from "../../Zustand/userStore";
 // import { TiTickOutline } from "react-icons/ti";
 import axios from "axios"; // ✅ You need to install axios
 
-const ChatPanel = ({ onBack }) => {
+// props: onBack, onViewContact
+const ChatPanel = ({ onBack, onViewContact }) => {
   const [sendImage, setSentImage] = useState({ file: null, url: "" });
 
   const [chat, setChat] = useState();
@@ -38,6 +39,7 @@ const ChatPanel = ({ onBack }) => {
   const { chatId, user, isReceiverBlocked, isCurrentUserBlocked, changeBlock } =
     useChatStore();
 
+    // end ref for auto scroll
   const endRef = useRef(null); // useRef hook
 
   // dropdown state and ref
@@ -187,12 +189,11 @@ const ChatPanel = ({ onBack }) => {
 
   // view contact functionality
   const handleViewContact = () => {
-    if (!user) return;
-    // Implement view contact logic here
-    
-    alert(`Viewing contact: ${user?.username}`);
-    setDropdownOpen(false); // Close the dropdown after clicking
-  };
+  if (!user) return;
+  setDropdownOpen(false);
+  onViewContact(); // 👈 Trigger the parent to show DetailsPanel
+};
+
 
   return (
     // top
@@ -201,7 +202,7 @@ const ChatPanel = ({ onBack }) => {
         <div className="user">
           {/* ✅ Show back button only on mobile */}
           {onBack && (
-            <button className="backBtn" onClick={onBack}>
+            <button id="chatBackBtn" onClick={onBack}>
               ←
             </button>
           )}
