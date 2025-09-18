@@ -3,6 +3,9 @@
   overflow: scroll;
   /* display: none; */
   border-left: 1px solid rgb(203, 201, 201);
+  padding-bottom: 3%;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 
   img {
     height: 7rem;
