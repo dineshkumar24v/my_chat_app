@@ -21,6 +21,9 @@ const App = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [showChatOnMobile, setShowChatOnMobile] = useState(false);
 
+  // new state variable to control whether to show the ChatPanel or DetailsPanel.
+  const [showDetailsPanel, setShowDetailsPanel] = useState(false);
+
   // 📱 Handle screen resizing
   useEffect(() => {
     const handleResize = () => {
@@ -70,21 +73,28 @@ const App = () => {
         <>
           {isMobile ? (
             <>
-              {/*  Mobile View Logic */}
               {!chatId || !showChatOnMobile ? (
                 <ContactListPanel
                   onOpenChat={() => setShowChatOnMobile(true)}
                 />
+              ) : showDetailsPanel ? (
+                <DetailsPanel onBack={() => setShowDetailsPanel(false)} /> // 👈 Mobile view
               ) : (
-                <ChatPanel onBack={() => setShowChatOnMobile(false)} />
+                <ChatPanel
+                  onBack={() => setShowChatOnMobile(false)}
+                  onViewContact={() => setShowDetailsPanel(true)} // 👈 Pass handler
+                />
               )}
             </>
           ) : (
             <>
-              {/*  Desktop View Logic */}
               <ContactListPanel />
-              {chatId && <ChatPanel />}
-              {chatId && <DetailsPanel />}
+              {chatId && !showDetailsPanel && (
+                <ChatPanel onViewContact={() => setShowDetailsPanel(true)} />
+              )}
+              {chatId && showDetailsPanel && (
+                <DetailsPanel onBack={() => setShowDetailsPanel(false)} />
+              )}
             </>
           )}
         </>
