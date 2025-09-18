@@ -89,15 +89,8 @@
   border-radius: 1rem;
 }
 
-.dropdown button:hover {
+#dropdown-right button:hover {
   background-color: rgba(195, 1, 40, 0.856);
-}
-#blockBtn {
-  background-color: rgba(186, 23, 23, 0.7);
-
-  &:hover {
-    background-color: rgba(255, 75, 75, 0.7);
-  }
 }
 
 /* Loading states */
