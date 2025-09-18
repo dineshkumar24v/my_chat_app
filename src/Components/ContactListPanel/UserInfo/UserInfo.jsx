@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./UserInfo.css";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { FaVideo } from "react-icons/fa6";
-import { FaEdit } from "react-icons/fa";
+// import { FaVideo } from "react-icons/fa6";
+// import { FaEdit } from "react-icons/fa";
 import { useUserStore } from "../../../Zustand/userStore";
 import { authentication } from "../../../ConfigFirebase/ConfigFirebase";
 import { toast } from "react-toastify";
@@ -55,7 +55,7 @@ const UserInfo = () => {
         />
 
         {dropdownOpen && (
-          <div className="dropdown">
+          <div id="dropdown-right">
             <button onClick={handleLogout}>Logout</button>
           </div>
         )}
