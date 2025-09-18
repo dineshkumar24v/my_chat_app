@@ -155,6 +155,20 @@ const ChatPanel = ({ onBack }) => {
     setWriteText("");
   };
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   // block user functionality
   const handleBlockUser = async () => {
     if (!user) return;
@@ -169,6 +183,15 @@ const ChatPanel = ({ onBack }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  // view contact functionality
+  const handleViewContact = () => {
+    if (!user) return;
+    // Implement view contact logic here
+    
+    alert(`Viewing contact: ${user?.username}`);
+    setDropdownOpen(false); // Close the dropdown after clicking
   };
 
   return (
@@ -203,7 +226,7 @@ const ChatPanel = ({ onBack }) => {
 
             {dropdownOpen && (
               <div id="user-dropdown">
-                <button>View contact</button>
+                <button onClick={handleViewContact}>View contact</button>
                 <button>Clear chat</button>
                 <button onClick={handleBlockUser} id="blockBtn">
                   {isCurrentUserBlocked
