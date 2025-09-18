@@ -1,7 +1,6 @@
 .chatCont {
   flex: 2;
   border-left: 1px solid rgb(203, 201, 201);
-  border-right: 1px solid rgb(203, 201, 201);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -54,10 +53,10 @@
 }
 
 /*------ back button ------- */
-.backBtn {
+#chatBackBtn {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   margin-right: 0.7rem;
   color: white;
   cursor: pointer;
@@ -77,7 +76,7 @@
   background-position: center;
 
   /* ✨ Glass effect */
-  background: rgba(255, 255, 255, 0.1);  
+  background: rgba(255, 255, 255, 0.1);
   /* translucent */
   backdrop-filter: blur(10px) saturate(180%);
   -webkit-backdrop-filter: blur(10px) saturate(180%);
@@ -127,10 +126,10 @@
 }
 
 #blockBtn {
-  background-color: rgba(186, 23, 23, 0.7) !important;
+  /* background-color: rgba(186, 23, 23, 0.7) !important; */
 
   &:hover {
-    background-color: rgba(255, 75, 75, 0.7) !important;
+    background-color: rgba(186, 23, 23, 0.7) !important;
   }
 }
 
