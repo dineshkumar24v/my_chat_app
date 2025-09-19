@@ -348,8 +348,8 @@ const ChatPanel = ({ onBack, onViewContact }) => {
         </button>
       </div>
       {showConfirmModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="clear-chat-modal-overlay">
+          <div className="clear-chat-modal-content">
             <h3>Clear Chat</h3>
             <p>
               Are you sure you want to clear this chat? This action cannot be
