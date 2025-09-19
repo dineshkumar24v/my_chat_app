@@ -134,10 +134,10 @@
 }
 
 /* clear chat modal */
-.modal-overlay {
+.clear-chat-modal-overlay {
   position: fixed;
   width: 30%;
-  height: 50%;
+  height: 40%;
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
@@ -146,20 +146,20 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 0.5rem;
   left: 50%;
-  top: 20%;
+  top: 25%;
 }
 
-.modal-content {
-  background: white;
+.clear-chat-modal-content {
+  color: white;
   padding: 20px;
   border-radius: 8px;
   max-width: 350px;
   text-align: center;
 }
 
-.modal-content button {
+.clear-chat-modal-content button {
   margin: 10px;
-  padding: 6px 14px;
+  padding: 7px 18px;
   cursor: pointer;
   border-radius: 0.8rem;
   background-color: rgba(17, 25, 40, 0.75);
