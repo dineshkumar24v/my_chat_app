@@ -39,12 +39,15 @@ const ChatPanel = ({ onBack, onViewContact }) => {
   const { chatId, user, isReceiverBlocked, isCurrentUserBlocked, changeBlock } =
     useChatStore();
 
-    // end ref for auto scroll
+  // end ref for auto scroll
   const endRef = useRef(null); // useRef hook
 
   // dropdown state and ref
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  // clear chat modal state
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   // Sometimes, the first render might not have any messages, so scrollIntoView does nothing. You can make sure to only run the scroll when chat?.messages?.length is non-zero.
 
@@ -189,11 +192,10 @@ const ChatPanel = ({ onBack, onViewContact }) => {
 
   // view contact functionality
   const handleViewContact = () => {
-  if (!user) return;
-  setDropdownOpen(false);
-  onViewContact(); // 👈 Trigger the parent to show DetailsPanel
-};
-
+    if (!user) return;
+    setDropdownOpen(false);
+    onViewContact(); // 👈 Trigger the parent to show DetailsPanel
+  };
 
   return (
     // top
@@ -228,7 +230,9 @@ const ChatPanel = ({ onBack, onViewContact }) => {
             {dropdownOpen && (
               <div id="user-dropdown">
                 <button onClick={handleViewContact}>View contact</button>
-                <button>Clear chat</button>
+                <button onClick={() => setShowConfirmModal(true)}>
+                  Clear chat
+                </button>
                 <button onClick={handleBlockUser} id="blockBtn">
                   {isCurrentUserBlocked
                     ? "You are Blocked!"
@@ -343,6 +347,32 @@ const ChatPanel = ({ onBack, onViewContact }) => {
           <IoMdSend />
         </button>
       </div>
+      {showConfirmModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Clear Chat</h3>
+            <p>
+              Are you sure you want to clear this chat? This action cannot be
+              undone.
+            </p>
+            <button
+              onClick={async () => {
+                try {
+                  await updateDoc(doc(db, "chats", chatId), {
+                    messages: [],
+                  });
+                  setShowConfirmModal(false);
+                } catch (err) {
+                  console.error("Failed to clear chat:", err);
+                }
+              }}
+            >
+              Yes, Clear
+            </button>
+            <button onClick={() => setShowConfirmModal(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
