@@ -86,17 +86,66 @@ body {
   }
 }
 
-/* Mobile devices */
+/* Mobile Devices (phones, less than 768px) */
 @media (max-width: 768px) {
   .appContainer {
     height: 100vh;
     overflow-y: auto;
     border-radius: 1rem;
+    padding-top: 1rem;
   }
 
   body {
     padding: 1rem;
     margin: 1rem;
+    overflow: scroll;
+    scrollbar-width: thin;
+  }
+}
+
+/* Tablets (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .appContainer {
+    height: 100vh;
+    overflow-y: auto;
+    border-radius: 1.25rem;
+  }
+
+  body {
+    padding: 2rem;
+    margin: 1.5rem;
+    overflow: scroll;
+    scrollbar-width: thin;
+  }
+}
+
+/* Small Desktops / Laptops (1025px to 1440px) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .appContainer {
+    height: 100vh;
+    overflow-y: auto;
+    border-radius: 1.5rem;
+  }
+
+  body {
+    padding: 2.5rem;
+    margin: 2rem;
+    overflow: scroll;
+    scrollbar-width: thin;
+  }
+}
+
+/* Large Screens / Desktops (1441px and above) */
+@media (min-width: 1441px) {
+  .appContainer {
+    height: 100vh;
+    overflow-y: auto;
+    border-radius: 2rem;
+  }
+
+  body {
+    padding: 3rem;
+    margin: 2.5rem;
     overflow: scroll;
     scrollbar-width: thin;
   }

@@ -185,7 +185,7 @@
 }
 .message,
 .myMessage {
-  max-width: 70%;
+  max-width: 45%;
   display: flex;
   gap: 20px;
   align-self: flex-start;
@@ -313,6 +313,38 @@ input::placeholder {
 
 /* mobile view */
 @media screen and (max-width: 769px) {
+  .chatCont {
+    flex: 1;
+    height: 100vh;
+  }
+  .backBtn {
+    display: block;
+    margin-left: 0.3rem;
+    font-size: 1.8rem;
+  }
+  .chatDesc {
+  font-size: 9px;
+}
+.chatName {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+  /* clear chat modal */
+  .clear-chat-modal-overlay {
+    width: 60%;
+    height: 45%;
+    left: 20%;
+    top: 25%;
+  }
+  .clear-chat-modal-content {
+    max-width: 90%;
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablets (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
   .chatCont {
     flex: 1;
     height: 100vh;
