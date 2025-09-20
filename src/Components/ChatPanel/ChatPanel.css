@@ -322,4 +322,16 @@ input::placeholder {
     margin-left: 0.3rem;
     font-size: 1.8rem;
   }
+
+  /* clear chat modal */
+  .clear-chat-modal-overlay {
+    width: 60%;
+    height: 40%;
+    left: 20%;
+    top: 25%;
+  }
+  .clear-chat-modal-content {
+    max-width: 90%;
+    font-size: 0.9rem;
+  }
 }
