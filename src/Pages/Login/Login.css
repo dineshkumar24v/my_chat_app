@@ -1,14 +1,19 @@
-.loginContainer{
+.loginContainer {
   height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
 }
-.loginh1{
+.loginContainer input:focus {
+  border: 2px solid #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.loginh1 {
   text-align: center;
 }
-#loginSubmitBtn{
+#loginSubmitBtn {
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -19,16 +24,16 @@
   cursor: pointer;
   font-weight: 500;
 
-  &:hover{
-  background-color: #1f8ef1;
+  &:hover {
+    background-color: #1f8ef1;
   }
 
-  &:disabled{
+  &:disabled {
     cursor: not-allowed;
     background-color: #67a9e280;
   }
 }
-#registerLink{
+#registerLink {
   text-decoration: none;
   padding: 10px;
 }
