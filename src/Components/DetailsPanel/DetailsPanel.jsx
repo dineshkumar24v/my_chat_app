@@ -57,25 +57,7 @@ const DetailsPanel = ({ onBack }) => {
       </div>
       </div>
       <div className="userInfoCont">
-        <div className="option">
-          <div className="title">
-            <span>Chat Settings</span>
-            <IoIosArrowDropupCircle className="icon" />
-          </div>
-        </div>
-        <div className="option">
-          <div className="title">
-            <span>Chat Settings</span>
-            <IoIosArrowDropupCircle className="icon" />
-          </div>
-        </div>
-        <div className="option">
-          <div className="title">
-            <span>Privacy & help</span>
-            <IoIosArrowDropupCircle className="icon" />
-          </div>
-        </div>
-        <div className="option">
+      <div className="option">
           <div className="title">
             <span>Shared Photos</span>
             <IoIosArrowDropdownCircle className="icon" />
@@ -117,6 +99,25 @@ const DetailsPanel = ({ onBack }) => {
             <IoIosArrowDropupCircle className="icon" />
           </div>
         </div>
+        <div className="option">
+          <div className="title">
+            <span>Notifications</span>
+            <IoIosArrowDropupCircle className="icon" />
+          </div>
+        </div>
+        <div className="option">
+          <div className="title">
+            <span>Encryption</span>
+            <IoIosArrowDropupCircle className="icon" />
+          </div>
+        </div>
+        <div className="option">
+          <div className="title">
+            <span>Disappearing messages</span>
+            <IoIosArrowDropupCircle className="icon" />
+          </div>
+        </div>
+        
         <button onClick={handleBlockUser}>
           {isCurrentUserBlocked
             ? "You are Blocked!"
