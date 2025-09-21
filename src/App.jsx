@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import ContactListPanel from "./Components/ContactListPanel/ContactListPanel";
 import ChatPanel from "./Components/ChatPanel/ChatPanel";
