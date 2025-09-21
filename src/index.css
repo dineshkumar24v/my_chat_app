@@ -26,17 +26,6 @@ body {
   border-radius: 12px;
   color: white;
 }
-
-/* .loading{
-  padding: 50px;
-  display: flex;
-  justify-content: center;
-  font-size: 2rem;
-  border-radius: 10px;
-  background-color: rgba(17, 25, 40, 0.9);
-  color: white;
-} */
-
 /* ---- Loading Screen ---- */
 .loading {
   display: flex;
@@ -48,7 +37,6 @@ body {
   text-align: center;
   color: black;
 }
-
 .spinner {
   width: 50px;
   height: 50px;
@@ -66,17 +54,7 @@ body {
     transform: rotate(360deg);
   }
 }
-
-/* Mobile view (stacked vertically)
-@media (max-width: 768px) {
-  .appContainer{
-    height: auto;
-    width: auto;
-  }
-} */
-
 /* ===== Responsive Layout ===== */
-
 /* Tablets (portrait + landscape) */
 @media (max-width: 1024px) {
   .appContainer {
