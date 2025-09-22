@@ -25,6 +25,7 @@ import { useChatStore } from "../../Zustand/chatStore";
 import { useUserStore } from "../../Zustand/userStore";
 // import { TiTickOutline } from "react-icons/ti";
 import axios from "axios"; // ✅ You need to install axios
+import { formatRelativeTime } from "../../Utils/Utils"; // ✅ Import the utility function
 
 // props: onBack, onViewContact
 const ChatPanel = ({ onBack, onViewContact }) => {
@@ -46,11 +47,21 @@ const ChatPanel = ({ onBack, onViewContact }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  // to force re-render every minute for updating relative time
+  const [, forceUpdate] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      forceUpdate((prev) => prev + 1); // Trigger re-render
+    }, 60000); // Every 1 min
+
+    return () => clearInterval(interval);
+  }, []);
+
   // clear chat modal state
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   // Sometimes, the first render might not have any messages, so scrollIntoView does nothing. You can make sure to only run the scroll when chat?.messages?.length is non-zero.
-
   useEffect(() => {
     if (chat?.messages?.length > 0) {
       endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -265,6 +276,14 @@ const ChatPanel = ({ onBack, onViewContact }) => {
             <div className="msgTexts">
               <p>{message.text} </p>
               {/* <span>1 min ago</span> */}
+              {/* timing functionality */}
+              <span className="msg-time">
+                {formatRelativeTime(message.createdAt)}
+                {/* to show exact date on hovering over time stamp */}
+                <span className="tooltip">
+                  {new Date(message.createdAt.seconds * 1000).toLocaleString()}
+                </span>
+              </span>
             </div>
           </div>
         ))}
