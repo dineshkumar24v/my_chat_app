@@ -423,10 +423,14 @@ input::placeholder {
 .emojiCont {
   position: absolute;
   bottom: 50px;
+  z-index: 2;
   right: 0;
   max-width: 300px;
   width: 90vw;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.epr_c90x4z {
+  height: 40px !important;
 }
 
 .sendButton {
@@ -467,6 +471,12 @@ input::placeholder {
     font-size: 15px;
     font-weight: 700;
   }
+  .emojiCont {
+    max-width: 300px;
+  }
+  .epr_c90x4z {
+    height: 0px;
+  }
 
   /* clear chat modal */
   .clear-chat-modal-overlay {
@@ -504,4 +514,7 @@ input::placeholder {
     max-width: 90%;
     font-size: 0.9rem;
   }
+}
+
+@media (max-width: 769px) {
 }
