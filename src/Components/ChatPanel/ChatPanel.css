@@ -219,7 +219,7 @@
 
   img {
     width: 100%;
-    height: 300px;
+    height: 200px;
     border-radius: 10px;
     object-fit: cover;
   }
@@ -286,7 +286,84 @@
   right: auto;
   left: 5px;
 }
+.date-separator {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  text-align: center;
+  margin: 20px 0 10px;
+  align-self: center;
 
+  animation: flipUp 0.4s ease-out;
+  transform-origin: bottom;
+}
+
+.date-separator span {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 2px 16px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  /* display: inline-block; */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+/* animate a seperator */
+@keyframes flipUp {
+  from {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
+/* Animation keyframes to messages*/
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.message-wrapper {
+  width: 100%;
+  display: flex;
+}
+.message-wrapper.from-left {
+  justify-content: flex-start;
+}
+
+.message-wrapper.from-right {
+  justify-content: flex-end;
+}
+
+/* Wrapper to apply the animation once */
+.message-wrapper.animate-once.from-left {
+  animation: slideInFromLeft 0.3s ease-out;
+}
+
+.message-wrapper.animate-once.from-right {
+  animation: slideInFromRight 0.3s ease-out;
+}
 
 /*------------- bottom --------------*/
 .bottom {
@@ -384,12 +461,12 @@ input::placeholder {
     font-size: 1.8rem;
   }
   .chatDesc {
-  font-size: 9px;
-}
-.chatName {
-  font-size: 15px;
-  font-weight: 700;
-}
+    font-size: 9px;
+  }
+  .chatName {
+    font-size: 15px;
+    font-weight: 700;
+  }
 
   /* clear chat modal */
   .clear-chat-modal-overlay {
