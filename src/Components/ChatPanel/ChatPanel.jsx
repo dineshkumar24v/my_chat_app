@@ -25,7 +25,8 @@ import { useChatStore } from "../../Zustand/chatStore";
 import { useUserStore } from "../../Zustand/userStore";
 // import { TiTickOutline } from "react-icons/ti";
 import axios from "axios"; // ✅ You need to install axios
-import { formatRelativeTime } from "../../Utils/Utils"; // ✅ Import the utility function
+import { formatRelativeTime, formatDaySeparator } from "../../Utils/Utils"; // ✅ Import the utility function
+import { formatISO, startOfDay } from "date-fns";
 
 // props: onBack, onViewContact
 const ChatPanel = ({ onBack, onViewContact }) => {
@@ -258,36 +259,62 @@ const ChatPanel = ({ onBack, onViewContact }) => {
       </div>
       {/* center *****************/}
       <div className="center">
-        {/* <div className='myMessage'>
-          <div className='msgTexts'>
-            <p>lorem kjdjhskjdvhsv ksdvks sgdksd sdkshdv dkshdv kdkjs </p>
-            <span>1 min ago</span>
-          </div>
-        </div> */}
+        {(() => {
+          const groupedMessages = {};
+          chat?.messages?.forEach((message) => {
+            const dateKey = formatISO(
+              startOfDay(
+                message.createdAt?.seconds
+                  ? new Date(message.createdAt.seconds * 1000)
+                  : new Date(message.createdAt)
+              )
+            );
+            if (!groupedMessages[dateKey]) groupedMessages[dateKey] = [];
+            groupedMessages[dateKey].push(message);
+          });
 
-        {chat?.messages?.map((message) => (
-          <div
-            className={
-              message.senderId === currentUser?.id ? "myMessage" : "message"
-            }
-            key={message?.createdAt}
-          >
-            {message.img && <img src={message.img} />}
-            <div className="msgTexts">
-              <p>{message.text} </p>
-              {/* <span>1 min ago</span> */}
-              {/* timing functionality */}
-              <span className="msg-time">
-                {formatRelativeTime(message.createdAt)}
-                {/* to show exact date on hovering over time stamp */}
-                <span className="tooltip">
-                  {new Date(message.createdAt.seconds * 1000).toLocaleString()}
-                </span>
-              </span>
-            </div>
-          </div>
-        ))}
+          return Object.keys(groupedMessages).flatMap((dateKey) => {
+            const group = groupedMessages[dateKey];
 
+            //  Wrap date header and group messages in fragments
+            return [
+              //  Date Separator
+              <div className="date-separator" key={`sep-${dateKey}`}>
+                <span>{formatDaySeparator(dateKey)}</span>
+              </div>,
+
+              //  Messages of that day
+              ...group.map((message) => {
+                const isSender = message.senderId === currentUser?.id;
+                const msgTime = new Date(
+                  message.createdAt.seconds * 1000
+                ).toLocaleString();
+
+                return (
+                  <div
+                    key={message.createdAt?.seconds || message.createdAt}
+                    className={`message-wrapper ${
+                      isSender ? "from-right" : "from-left"
+                    } animate-once`}
+                  >
+                    <div className={isSender ? "myMessage" : "message"}>
+                      <div className="msgTexts">
+                        {message.img && <img src={message.img} />}
+                        {message.text && <p>{message.text}</p>}
+                        <span className="msg-time">
+                          {formatRelativeTime(message.createdAt)}
+                          <span className="tooltip">{msgTime}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }),
+            ];
+          });
+        })()}
+
+        {/*  Image preview (unsent) */}
         {sendImage.url && (
           <div className="myMessage">
             <div className="msgTexts">
@@ -296,8 +323,10 @@ const ChatPanel = ({ onBack, onViewContact }) => {
           </div>
         )}
 
+        {/* to scroll to the latest chat */}
         <div ref={endRef}></div>
       </div>
+
       {/* bottom *****************************/}
       <div className="bottom">
         <div className="BottomIcons">
