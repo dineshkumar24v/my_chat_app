@@ -78,7 +78,7 @@ const Login = ({ focusEmail }) => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="password here"
+              placeholder="password "
               onChange={(e) =>
                 setLoginDetails({ ...loginDetails, password: e.target.value })
               }
