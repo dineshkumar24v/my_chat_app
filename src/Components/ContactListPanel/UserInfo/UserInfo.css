@@ -77,11 +77,9 @@
 #dropdown-right button {
   padding: 10px 15px;
   background: transparent;
-  /* background-color: rgba(230, 74, 105, 0.553); */
   background-color: rgb(21, 21, 91);
   color: white;
   border: none;
-  /* text-align: left; */
   cursor: pointer;
   margin: 0.5rem;
   transition: background-color 0.2s ease-in-out;
@@ -93,31 +91,3 @@
   background-color: rgba(195, 1, 40, 0.856);
 }
 
-/* Loading states */
-/* .userInfoCont.loading .user {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  
-}
-
-.avatar-skeleton {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #eee;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-.name-skeleton {
-  width: 100px;
-  height: 20px;
-  background: #eee;
-  border-radius: 4px;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 0.3; }
-} */
