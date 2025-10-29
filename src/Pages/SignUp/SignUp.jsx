@@ -80,7 +80,9 @@ const SignUp = ({ onSignupSuccess }) => {
       });
 
       await signOut(authentication); //  Log out the user after signup
-      toast.success("Account created Successfully! Please login", { autoClose: 2000 });
+      toast.success("Account created Successfully! Please login", {
+        autoClose: 2000,
+      });
       onSignupSuccess(); //  Trigger focus in Login
 
       // Clear form on signup
@@ -138,7 +140,7 @@ const SignUp = ({ onSignupSuccess }) => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="password here"
+              placeholder="password"
               onChange={(e) =>
                 setsignUpDetails({ ...signUpDetails, password: e.target.value })
               }
