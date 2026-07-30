@@ -100,9 +100,9 @@ const SignUp = ({ onSignupSuccess }) => {
     <div className="signUpContainer">
       <div>
         <h1 className="signuph1">Create an account</h1>
-        <Form onSubmit={handleSignUpSubmit}>
+        <Form className="signUpForm" onSubmit={handleSignUpSubmit}>
           <Form.Group controlId="formFileSm" className="mb-3">
-            <Form.Label className="text">
+            <Form.Label className="avatarUploadLabel">
               <img
                 src={uploadImage.url || "./avatar.jpg"}
                 alt="avatar preview"
@@ -112,6 +112,7 @@ const SignUp = ({ onSignupSuccess }) => {
             <Form.Control
               type="file"
               size="sm"
+              className="avatarUploadInput"
               style={{ display: "none" }}
               onChange={handleuploadImage}
             />
@@ -121,6 +122,7 @@ const SignUp = ({ onSignupSuccess }) => {
             <Form.Control
               type="text"
               placeholder="display name"
+              className="signUpInput"
               onChange={(e) =>
                 setsignUpDetails({ ...signUpDetails, name: e.target.value })
               }
@@ -131,6 +133,7 @@ const SignUp = ({ onSignupSuccess }) => {
             <Form.Control
               type="email"
               placeholder="name@example.com"
+              className="signUpInput"
               onChange={(e) =>
                 setsignUpDetails({ ...signUpDetails, email: e.target.value })
               }
@@ -141,6 +144,7 @@ const SignUp = ({ onSignupSuccess }) => {
             <Form.Control
               type="password"
               placeholder="password"
+              className="signUpInput"
               onChange={(e) =>
                 setsignUpDetails({ ...signUpDetails, password: e.target.value })
               }
