@@ -60,25 +60,29 @@ const Login = ({ focusEmail }) => {
     <div className="loginContainer">
       <div>
         <h1 className="loginh1">Login</h1>
-        <Form onSubmit={handleLoginSubmit}>
+        <Form className="loginForm" onSubmit={handleLoginSubmit}>
           {" "}
           {/* // form submit  */}
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-3" controlId="loginEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
-              placeholder="email"
+              placeholder="name@example.com"
+              className="loginInput"
               ref={emailInputRef}
+              autoComplete="email"
               onChange={(e) =>
                 setLoginDetails({ ...loginDetails, email: e.target.value })
               }
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-3" controlId="loginPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="password "
+              placeholder="Enter your password"
+              className="loginInput"
+              autoComplete="current-password"
               onChange={(e) =>
                 setLoginDetails({ ...loginDetails, password: e.target.value })
               }

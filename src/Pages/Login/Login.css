@@ -5,10 +5,45 @@
   justify-content: center;
   margin: auto;
 }
-.loginContainer input:focus {
-  border: 2px solid #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+
+.loginForm {
+  width: min(100%, 380px);
+}
+
+.loginForm .form-label {
+  margin-bottom: 0.5rem;
+  color: #e9eaec;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.loginInput.form-control {
+  min-height: 28px;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #d0d5dd;
+  border-radius: 16px;
+  background: #f8fafc;
+  color: #1d2939;
+  font-size: 0.95rem;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.loginInput.form-control::placeholder {
+  color: #98a2b3;
+}
+
+.loginInput.form-control:hover {
+  border-color: #b2c1d6;
+  background: #ffffff;
+}
+
+.loginInput.form-control:focus {
+  border-color: #53acfb;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(83, 172, 251, 0.18);
 }
 .loginh1 {
   text-align: center;
