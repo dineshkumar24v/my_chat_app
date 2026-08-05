@@ -29,6 +29,13 @@ Create an account, find another user, then exchange text, emoji, and image messa
 - Responsive back navigation for chat and contact-detail views
 - Toast notifications for account and upload actions
 
+## Screenshots
+
+<div align="center">
+  <img src="./public/Screenshot1.png" alt="Login and account-creation screen" width="49%" />
+  <img src="./public/Screenshot2.png" alt="Chat interface with contacts and messages" width="49%" />
+</div>
+
 ## Tech Stack
 
 - React 19 with Vite
