@@ -34,6 +34,7 @@ Create an account, find another user, then exchange text, emoji, and image messa
 <div align="center">
   <img src="./public/Screenshot1.png" alt="Login and account-creation screen" width="49%" />
   <img src="./public/Screenshot2.png" alt="Chat interface with contacts and messages" width="49%" />
+  <img src="./public/Screenshot3.png" alt="Chat interface with contacts and messages" width="49%" />
 </div>
 
 ## Tech Stack
@@ -87,20 +88,20 @@ Vite will print the local URL, usually `http://localhost:5173`.
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the development server. |
-| `npm run build` | Build the production app into `dist`. |
+| Command           | Description                           |
+| ----------------- | ------------------------------------- |
+| `npm run dev`     | Start the development server.         |
+| `npm run build`   | Build the production app into `dist`. |
 | `npm run preview` | Preview the production build locally. |
-| `npm run lint` | Run ESLint. |
+| `npm run lint`    | Run ESLint.                           |
 
 ## Firestore Collections
 
-| Collection | Purpose |
-| --- | --- |
-| `users` | Stores user profiles, avatars, and blocked-user IDs. |
+| Collection  | Purpose                                                    |
+| ----------- | ---------------------------------------------------------- |
+| `users`     | Stores user profiles, avatars, and blocked-user IDs.       |
 | `userChats` | Stores each user's conversation list and message metadata. |
-| `chats` | Stores messages for each conversation. |
+| `chats`     | Stores messages for each conversation.                     |
 
 ## Project Structure
 
