@@ -31,11 +31,17 @@ Create an account, find another user, then exchange text, emoji, and image messa
 
 ## Screenshots
 
-<div align="center">
-  <img src="./public/Screenshot1.png" alt="Login and account-creation screen" width="49%" />
-  <img src="./public/Screenshot2.png" alt="Chat interface with contacts and messages" width="49%" />
-  <img src="./public/Screenshot3.png" alt="Chat interface with contacts and messages" width="49%" />
-</div>
+### Login and Sign-Up Page
+
+![Login and Sign-Up Page](./public/Screenshot1.png)
+
+### Chat Dashboard
+
+![Chat Dashboard](./public/Screenshot2.png)
+
+### Image Messaging
+
+![Image Messaging](./public/Screenshot3.png)
 
 ## Tech Stack
 
