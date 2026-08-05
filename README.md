@@ -1,6 +1,18 @@
 # React Chat App
 
-A responsive, real-time one-to-one chat application built with React, Vite, Firebase, and Zustand. Create an account, find another user, then exchange text, emoji, and image messages in real time.
+### A responsive, real-time chat application built with React, Vite, Firebase, Zustand, and Cloudinary.
+
+<div align="center">
+
+[![React](https://img.shields.io/badge/React-User%20Interface-61DAFB?style=for-the-badge&logo=react&logoColor=black)](#tech-stack)
+[![Vite](https://img.shields.io/badge/Vite-Build%20Tool-646CFF?style=for-the-badge&logo=vite&logoColor=white)](#tech-stack)
+[![Firebase](https://img.shields.io/badge/Firebase-Authentication%20%26%20Database-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](#tech-stack)
+[![Zustand](https://img.shields.io/badge/Zustand-State%20Management-443E38?style=for-the-badge)](#tech-stack)
+[![Cloudinary](https://img.shields.io/badge/Cloudinary-Image%20Uploads-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)](#tech-stack)
+
+</div>
+
+Create an account, find another user, then exchange text, emoji, and image messages in real time.
 
 ## Features
 
@@ -18,7 +30,7 @@ A responsive, real-time one-to-one chat application built with React, Vite, Fire
 
 ## Tech Stack
 
-- React 19 and Vite
+- React 19 with Vite
 - Firebase Authentication and Cloud Firestore
 - Zustand for application state
 - Cloudinary and Axios for image uploads
